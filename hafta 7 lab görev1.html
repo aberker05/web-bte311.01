@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğretim Teknolojileri | Bilişim Tek.</title>
+    
+    <style>
+        /* Genel Ayarlar */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7; /* Hafif gri arka plan */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Sayfanın tamamını kaplaması için */
+            overflow: hidden; /* Taşmaları engellemek için */
+        }
+
+        /* Merkezi Alan Kapsayıcısı */
+        .container {
+            flex-grow: 1; /* Alt menüyü aşağı itmek için */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative; /* Alt divlerin konumlandırılması için */
+            overflow: hidden; /* Kenar taşmalarını gizlemek için */
+        }
+
+        /* İçerik Alanı - Metin ve Efektin Evi */
+        .content-area {
+            position: relative;
+            width: 80%;
+            max-width: 900px;
+            height: 450px; /* Görseli taklit etmek için sabit yükseklik */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Başlık ve Alt Başlık Metinleri */
+        .header-text {
+            position: relative; /* Efekt div'lerinin üstünde kalması için */
+            z-index: 10; 
+            color: white;
+            text-align: center;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); /* Daha belirgin gölge */
+        }
+
+        .header-text h1 {
+            font-size: 4.5em; /* Büyük başlık */
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .header-text h2 {
+            font-size: 1.2em; /* Alt başlık */
+            font-weight: normal;
+            margin-top: 5px;
+        }
+
+        /* Arka Plan Efekti - 10 Alt Alta Div */
+        .overlay-box {
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.1); /* Başlangıçta çok saydam kırmızı */
+            width: 30%; /* Başlangıç boyutları */
+            height: 30%;
+            transform: translate(-50%, -50%); /* Merkezi konumlandırma için */
+            top: 50%;
+            left: 50%;
+            transition: all 0.5s ease;
+            z-index: 1; /* Metnin altında kalması için */
+            opacity: 0.8; /* Genel bir saydamlık */
+        }
+
+        /* Her bir div için + şeklinde yayılma ve merkeze doğru yoğunlaşma */
+        .box-1 { /* Sol üst çapraz */
+            transform: translate(calc(-50% - 200px), calc(-50% - 100px));
+            width: 35%; height: 35%;
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        .box-2 { /* Sağ üst çapraz */
+            transform: translate(calc(-50% + 200px), calc(-50% - 100px));
+            width: 35%; height: 35%;
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        .box-3 { /* Sol alt çapraz */
+            transform: translate(calc(-50% - 200px), calc(-50% + 100px));
+            width: 35%; height: 35%;
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        .box-4 { /* Sağ alt çapraz */
+            transform: translate(calc(-50% + 200px), calc(-50% + 100px));
+            width: 35%; height: 35%;
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        .box-5 { /* Üst orta */
+            transform: translate(-50%, calc(-50% - 150px));
+            width: 50%; height: 40%;
+            background-color: rgba(255, 0, 0, 0.2);
+        }
+        .box-6 { /* Alt orta */
+            transform: translate(-50%, calc(-50% + 150px));
+            width: 50%; height: 40%;
+            background-color: rgba(255, 0, 0, 0.2);
+        }
+        .box-7 { /* Sol orta */
+            transform: translate(calc(-50% - 250px), -50%);
+            width: 40%; height: 50%;
+            background-color: rgba(255, 0, 0, 0.2);
+        }
+        .box-8 { /* Sağ orta */
+            transform: translate(calc(-50% + 250px), -50%);
+            width: 40%; height: 50%;
+            background-color: rgba(255, 0, 0, 0.2);
+        }
+
+        .box-9 { /* Merkeze yakın orta */
+            width: 65%; height: 60%;
+            background-color: rgba(255, 0, 0, 0.4);
+            z-index: 2; /* Biraz daha önde */
+        }
+        .box-10 { /* Tam merkezdeki en yoğun kutu */
+            width: 50%; height: 50%;
+            background-color: rgba(255, 0, 0, 0.7); /* En koyu kırmızı */
+            z-index: 3; /* En önde */
+        }
+        
+        /* Alt Menü Çubuğu */
+        .footer-menu {
+            background-color: #333; /* Koyu arka plan */
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 0.9em;
+            border-top: 3px solid #666; /* Üstteki çizgiyi taklit etmek için */
+        }
+
+        .footer-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-menu a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Ekran görüntüsündeki gibi hafif bir gölge/Hyper Icon kısmı olsaydı: */
+        .content-area::before {
+            content: "Hyper Icon";
+            position: absolute;
+            top: -30px;
+            color: #666;
+            font-size: 0.8em;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content-area">
+            <div class="overlay-box box-1"></div>
+            <div class="overlay-box box-2"></div>
+            <div class="overlay-box box-3"></div>
+            <div class="overlay-box box-4"></div>
+            <div class="overlay-box box-5"></div>
+            <div class="overlay-box box-6"></div>
+            <div class="overlay-box box-7"></div>
+            <div class="overlay-box box-8"></div>
+            <div class="overlay-box box-9"></div>
+            <div class="overlay-box box-10"></div>
+            
+            <div class="header-text">
+                <h1>Hacettepe BÖTE</h1>
+                <h2>Öğretim teknolojileri ve bilişim teknolojileri eğitimi için en iyi adresi.</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-menu">
+        <a href="#">WEB Programcılığı Dersi</a>
+        <a href="#">Topluluk</a>
+        <a href="#">Akademik</a>
+    </div>
+
+</body>
+</html>
