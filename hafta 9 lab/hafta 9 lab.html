@@ -41,9 +41,12 @@
       <div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px">
         <strong>3 farklı resmi göster / gizle butonları</strong>
         <div class="toggles">
-          <button id="toggle1">Resim 1 göster/gizle</button>
-          <button id="toggle2">Resim 2 göster/gizle</button>
-          <button id="toggle3">Resim 3 göster/gizle</button>
+ <button id="show1">Resim 1 Göster</button>
+<button id="hide1">Resim 1 Gizle</button>
+<button id="show2">Resim 2 Göster</button>
+<button id="hide2">Resim 2 Gizle</button>
+<button id="show3">Resim 3 Göster</button>
+<button id="hide3">Resim 3 Gizle</button>
         </div>
 
         <div class="img-grid" id="threeImages">
@@ -101,16 +104,17 @@
       }
 
       
-      function toggleById(imgId, btn){
-        const img = document.getElementById(imgId);
-        if(!img) return;
-        if(img.style.display === 'none'){
-          img.style.display = '';
-          btn.textContent = btn.textContent.replace(/gizle/i,'gizle');
-        } else {
-          img.style.display = 'none';
-        }
-      }
+       function show(imgId){ document.getElementById(imgId).style.display = ''; }
+function hide(imgId){ document.getElementById(imgId).style.display = 'none'; }
+
+
+document.getElementById('show1').onclick = () => show('img1');
+document.getElementById('hide1').onclick = () => hide('img1');
+document.getElementById('show2').onclick = () => show('img2');
+document.getElementById('hide2').onclick = () => hide('img2');
+document.getElementById('show3').onclick = () => show('img3');
+document.getElementById('hide3').onclick = () => hide('img3');
+
 
       const btn1 = document.getElementById('toggle1');
       const btn2 = document.getElementById('toggle2');
@@ -128,6 +132,7 @@
   </script>
 </body>
 </html>
+
 
 
 
