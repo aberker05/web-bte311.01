@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rastgele Arka Plan ve Resimler</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column;align-items:center;gap:18px;padding:28px;transition:background 400ms ease}
+    header{width:100%;max-width:980px;display:flex;justify-content:space-between;align-items:center}
+    h1{font-size:20px;margin:0}
+    main{width:100%;max-width:980px;background:rgba(255,255,255,0.85);backdrop-filter:blur(6px);border-radius:12px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    .featured{display:flex;flex-direction:column;gap:12px;align-items:center}
+    .featured img{max-width:100%;height:auto;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+    .toggles{display:flex;gap:8px;flex-wrap:wrap}
+    button{padding:10px 14px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    .img-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+    .img-grid img{width:300px;max-width:100%;height:auto;border-radius:8px;display:block}
+    footer{margin-top:12px;font-size:13px;color:#222}
+    .controls{display:flex;gap:10px;align-items:center}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sayfa yenilemede rastgele arka plan ve seçili resim</h1>
+    <div class="controls">
+      <small id="bgInfo"></small>
+    </div>
+  </header>
+
+  <main>
+    <section class="featured">
+      <div>
+        <strong>Rastgele seçilen resim (10 resim içinden):</strong>
+      </div>
+      <img id="randomImage" alt="Rastgele seçilen resim" src="" />
+      <div style="font-size:13px;color:#333">(Sayfa her yenilendiğinde bu alan 10 resim arasından rastgele birini gösterir.)</div>
+
+      <div style="width:100%;height:1px;background:rgba(0,0,0,0.06);margin-top:12px"></div>
+
+      <div style="width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:12px">
+        <strong>3 farklı resmi göster / gizle butonları</strong>
+        <div class="toggles">
+          <button id="toggle1">Resim 1 göster/gizle</button>
+          <button id="toggle2">Resim 2 göster/gizle</button>
+          <button id="toggle3">Resim 3 göster/gizle</button>
+        </div>
+
+        <div class="img-grid" id="threeImages">
+          
+          <img id="img1" src="https://picsum.photos/id/1015/600/400" alt="Resim 1" />
+          <img id="img2" src="https://picsum.photos/id/1025/600/400" alt="Resim 2" />
+          <img id="img3" src="https://picsum.photos/id/1003/600/400" alt="Resim 3" />
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Not: Resim kaynakları <em>picsum.photos</em> üzerinden örnek amaçlı kullanıldı. Kendi resim URL'lerinizi isterseniz kolayca değiştirebilirsiniz.</div>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      
+      function randomHexColor(){
+        
+        const r = Math.floor(Math.random()*256).toString(16).padStart(2,'0');
+        const g = Math.floor(Math.random()*256).toString(16).padStart(2,'0');
+        const b = Math.floor(Math.random()*256).toString(16).padStart(2,'0');
+        return `#${r}${g}${b}`;
+      }
+
+      const bg = randomHexColor();
+      document.body.style.background = bg;
+      const bgInfo = document.getElementById('bgInfo');
+      if(bgInfo) bgInfo.textContent = bg;
+
+      // 2) 10 farklı resim içinden rastgele birini seç ve göster
+      const tenImages = [
+        'resimm1.jpg',
+    'resim 2.jpg',
+     'resim 3.jpg',
+      'resim 4.jpg',
+       'resim 5.jpg',
+    'resim 6.jpg',
+    'resim 7.jpg',
+    'resim 8.jpg',
+    'resim 9.jpg',
+    'resim 10.jpg'
+      ];
+
+      function chooseRandom(arr){
+        return arr[Math.floor(Math.random()*arr.length)];
+      }
+
+      const chosen = chooseRandom(tenImages);
+      const randomImageEl = document.getElementById('randomImage');
+      if(randomImageEl){
+        randomImageEl.src = chosen;
+      }
+
+      // 3) 3 farklı resmi göster/gizle butonları
+      function toggleById(imgId, btn){
+        const img = document.getElementById(imgId);
+        if(!img) return;
+        if(img.style.display === 'none'){
+          img.style.display = '';
+          btn.textContent = btn.textContent.replace(/gizle/i,'gizle');
+        } else {
+          img.style.display = 'none';
+        }
+      }
+
+      const btn1 = document.getElementById('toggle1');
+      const btn2 = document.getElementById('toggle2');
+      const btn3 = document.getElementById('toggle3');
+
+      btn1 && btn1.addEventListener('click', function(){ toggleById('img1', btn1); });
+      btn2 && btn2.addEventListener('click', function(){ toggleById('img2', btn2); });
+      btn3 && btn3.addEventListener('click', function(){ toggleById('img3', btn3); });
+
+      
+
+      
+
+    })();
+  </script>
+</body>
+</html>
