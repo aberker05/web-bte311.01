@@ -1,0 +1,44 @@
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Matrix Hız Testi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="heading">HACKER TYPER</div>
+    <div class="header">
+      <div class="wpm">
+        <div class="header_text">KELİME/DK</div>
+        <div class="curr_wpm">100</div>
+      </div>
+      <div class="cpm">
+        <div class="header_text">KARAKTER/DK</div>
+        <div class="curr_cpm">100</div>
+      </div>
+      <div class="score">
+        <div class="header_text">PUAN</div>
+        <div class="curr_score">0</div>
+      </div>
+      <div class="errors">
+        <div class="header_text">HATA SAYISI</div>
+        <div class="curr_errors">0</div>
+      </div>
+      <div class="timer">
+        <div class="header_text">SÜRE</div>
+        <div class="curr_time">40s</div>
+      </div>
+      <div class="accuracy">
+        <div class="header_text">% DOĞRULUK</div>
+        <div class="curr_accuracy">100</div>
+      </div>
+    </div>
+
+    <div class="quote">Oyuna başlamak için aşağıdaki alana tıklayın.</div>
+    <textarea class="input_area" placeholder="Kodları buraya yaz..." oninput="processCurrentText()"
+      onfocus="startGame()"></textarea>
+    <button class="restart_btn" onclick="resetValues()">Sistemi Yeniden Başlat</button>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
