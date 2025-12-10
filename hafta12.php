@@ -2,54 +2,73 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title> Tablo Oluşturma </title>
+    <title>PHP Ödevleri - Hepsi Bir Arada</title>
     <style>
-        table { border-collapse: collapse; margin-top: 20px; }
-        td { border: 1px solid black; padding: 10px; text-align: center; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .kutu { 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            margin-bottom: 20px; 
+            background-color: #f9f9f9; 
+            border-radius: 5px;
+        }
+        table { border-collapse: collapse; margin-top: 10px; background-color: white; }
+        td { border: 1px solid #333; padding: 10px; text-align: center; }
+        h3 { color: #d35400; margin-top: 0; }
     </style>
 </head>
 <body>
 
-    <h3>Tablo Oluşturma Formu</h3>
-    
-    <form method="POST">
-        Satır Sayısı: <input type="number" name="satir" required min="1"><br><br>
-        Sütun Sayısı: <input type="number" name="sutun" required min="1"><br><br>
-        <button type="submit" name="olustur">Tabloyu Oluştur</button>
-    </form>
+    <div class="kutu">
+        <h3>1. Görev: 1-100 Arası Tek Sayılar</h3>
+        <div style="word-wrap: break-word;">
+            <?php
+            
+            for($i = 1; $i <= 100; $i++) {
+                
+                if($i % 2 != 0) {
+                    echo "<b>$i</b> - ";
+                }
+            }
+            ?>
+        </div>
+    </div>
 
-    <hr>
-
-    <?php
-    
-    if(isset($_POST['olustur'])) {
+    <div class="kutu">
+        <h3>2. Görev: Dinamik Tablo Oluşturucu</h3>
         
-        $satir = $_POST['satir'];
-        $sutun = $_POST['sutun'];
+        <form method="POST">
+            Satır Sayısı: <input type="number" name="satir" required style="width: 50px;">
+            Sütun Sayısı: <input type="number" name="sutun" required style="width: 50px;">
+            <button type="submit" name="olustur">Tabloyu Çiz</button>
+        </form>
 
-        echo "<h4>$satir Satır ve $sutun Sütunlu Tablo:</h4>";
-        echo "<table>"; 
+        <?php
+        
+        if(isset($_POST['olustur'])) {
+            $satir = $_POST['satir'];
+            $sutun = $_POST['sutun'];
 
-    
-        for($i = 0; $i < $satir; $i++) {
-            echo "<tr>"; 
+            echo "<hr>";
+            echo "<h4>Tablo Sonucu:</h4>";
+            echo "<table>";
 
             
-            for($j = 0; $j < $sutun; $j++) {
+            for($x = 0; $x < $satir; $x++) {
+                echo "<tr>";
                 
                 
-                $rastgeleSayi = rand(1, 100);
+                for($y = 0; $y < $sutun; $y++) {
+                    
+                    echo "<td>" . rand(1, 100) . "</td>";
+                }
                 
-        
-                echo "<td>" . $rastgeleSayi . "</td>";
+                echo "</tr>";
             }
-
-            echo "</tr>"; 
+            echo "</table>";
         }
-
-        echo "</table>"; 
-    }
-    ?>
+        ?>
+    </div>
 
 </body>
 </html>
