@@ -10,6 +10,6 @@ Projeyi bilgisayarınızda çalıştırmak için terminalde şu komutları sıra
 
 1. `npm install` (Gerekli paketleri yükler)
 2. `npm start` (Projeyi tarayıcıda açar)
-3. projeyi çalıştırmak için 2allow cors' eklentisi gerekmektedir.
+3. projeyi çalıştırmak için 'allow cors' eklentisi gerekmektedir.
 
 
