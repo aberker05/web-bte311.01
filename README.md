@@ -1,4 +1,4 @@
-# Premier Lig Fikstür Uygulaması
+# Premier Lig Fikstür ve Sonuç Uygulaması
 
 Bu proje, React kullanılarak geliştirilmiş ve Premier Lig maç sonuçlarını anlık olarak gösteren bir web uygulamasıdır.
 
